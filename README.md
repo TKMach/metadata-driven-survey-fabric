@@ -38,32 +38,50 @@ The resulting design provides:
 
 ## Architecture
 
-For a detailed visual representation of the ingestion framework, see the [Architecture Diagram](docs/architecture_diagram.md).
+For a detailed explanation of the ingestion framework, see the [Architecture Documentation](docs/architecture_diagram.md).
 
-```text
-Microsoft Fabric Pipeline
-          |
-          v
-Ingestion Notebook / Python Modules
-          |
-          +------ Secret Provider ------> OAuth Token
-          |
-          +------ Metadata Registry
-          |            |
-          |            v
-          +------ Zoho Survey REST API
-                         |
-                  JSON / metadata
-                         |
-                         v
-                   Delta Lakehouse
-                 /       |        \
-          Questions   Headers    Answers
-                         |
-                         v
-                 Run Log / Monitoring
-```
+```mermaid
+flowchart TB
 
+    subgraph ORCH["1. Orchestration Layer"]
+        A["Microsoft Fabric<br/>Data Pipeline"]
+        B["Fabric Notebook<br/>Python Orchestration"]
+        A --> B
+    end
+
+    subgraph SEC["2. Authentication & Source"]
+        C["Azure Key Vault<br/>OAuth Credentials"]
+        D["Zoho Survey<br/>REST API"]
+    end
+
+    subgraph CTRL["3. Metadata & Incremental Control"]
+        E["Metadata Registry<br/>Departments & Surveys"]
+        F["Change Detection<br/>Response Windows & Checkpoints"]
+        G["Response Discovery<br/>Detail Extraction"]
+        E --> F
+        F --> G
+    end
+
+    subgraph STORE["4. Delta Lakehouse"]
+        H[("Delta Lakehouse")]
+        I["Survey Questions"]
+        J["Response Headers"]
+        K["Survey Answers"]
+        L["Ingestion Run Log<br/>Health Views"]
+
+        H --> I
+        H --> J
+        H --> K
+        H --> L
+    end
+
+    C --> B
+    B --> D
+    B --> E
+    D --> F
+    G --> D
+    G --> H
+    E --> H
 ## Incremental ingestion
 
 The registry stores source activity metadata and ingestion checkpoints. Surveys
