@@ -1,4 +1,5 @@
 # Metadata-Driven Survey API Ingestion Framework on Microsoft Fabric
+[![Python CI](https://github.com/TKMach/metadata-driven-survey-fabric/actions/workflows/ci.yml/badge.svg)](https://github.com/TKMach/metadata-driven-survey-fabric/actions/workflows/ci.yml)
 
 A sanitized portfolio implementation of a metadata-driven framework that extracts
 Zoho Survey data through REST APIs and loads normalized Delta tables into a
