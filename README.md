@@ -38,6 +38,8 @@ The resulting design provides:
 
 ## Architecture
 
+For a detailed visual representation of the ingestion framework, see the [Architecture Diagram](docs/architecture_diagram.md).
+
 ```text
 Microsoft Fabric Pipeline
           |
