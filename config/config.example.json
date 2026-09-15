@@ -1,0 +1,19 @@
+{
+  "zoho": {
+    "accounts_url": "https://accounts.zoho.com/oauth/v2/token",
+    "survey_base_url": "https://survey.zoho.com/survey/api/v1/private",
+    "portal_id": "YOUR_PORTAL_ID"
+  },
+  "secrets": {
+    "provider": "azure_key_vault",
+    "vault_url": "https://YOUR-KEY-VAULT.vault.azure.net/"
+  },
+  "lakehouse": {
+    "name": "SurveyAnalyticsLakehouse"
+  },
+  "ingestion": {
+    "initial_lookback_days": 30,
+    "overlap_days": 1,
+    "request_timeout_seconds": 60
+  }
+}
